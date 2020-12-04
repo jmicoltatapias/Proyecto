@@ -4,7 +4,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
 
-public final class Login_jsp extends org.apache.jasper.runtime.HttpJspBase
+public final class PosiblesClientes_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
 
   private static final JspFactory _jspxFactory = JspFactory.getDefaultFactory();
@@ -52,74 +52,33 @@ public final class Login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">\n");
       out.write("        <meta name=\"description\" content=\"\">\n");
       out.write("        <meta name=\"author\" content=\"\">\n");
-      out.write("        <title>Login</title>\n");
+      out.write("        <title>Posibles clientes</title>\n");
       out.write("        <!-- Bootstrap core CSS-->\n");
       out.write("        <link href=\"vendor/bootstrap/css/bootstrap.css\" rel=\"stylesheet\">\n");
       out.write("        <!-- Custom fonts for this template-->\n");
-      out.write("        <link href=\"vendor/font-awesome/css/font-awesome.css\" rel=\"stylesheet\" type=\"text/css\">\n");
+      out.write("        <link href=\"vendor/font-awesome/css/font-awesome.min.css\" rel=\"stylesheet\" type=\"text/css\">\n");
       out.write("        <!-- Custom styles for this template-->\n");
       out.write("        <link href=\"css/sb-admin.css\" rel=\"stylesheet\">\n");
-      out.write("        <link href=\"css/sweetalert.css\" rel=\"stylesheet\"/>\n");
       out.write("\n");
       out.write("        <!-- Bootstrap core JavaScript-->\n");
       out.write("        <script src=\"vendor/jquery/jquery.min.js\"></script>\n");
       out.write("        <script src=\"vendor/bootstrap/js/bootstrap.bundle.min.js\"></script>\n");
       out.write("        <!-- Core plugin JavaScript-->\n");
       out.write("        <script src=\"vendor/jquery-easing/jquery.easing.min.js\"></script>\n");
-      out.write("        <script src=\"js/sweetalert.min.js\"></script>\n");
-      out.write("\n");
       out.write("    </head>\n");
-      out.write("    <body class=\"bg-dark\">\n");
-      out.write("  \n");
-      out.write("        ");
-
-            if (request.getAttribute("stError") != null) {
-        
-      out.write("\n");
-      out.write("        <input type=\"text\" hidden=\"\" id=\"txtMensaje\" value=\"");
-      out.print(request.getAttribute("stError").toString());
-      out.write("\"/>\n");
-      out.write("        <script>\n");
-      out.write("            swal(\"Heyyyy\",document.getElementById(\"txtMensaje\").value,\"error\");\n");
-      out.write("        </script>\n");
-      out.write("        ");
-
-            }
-        
-      out.write("\n");
-      out.write("        \n");
-      out.write("        <div class=\"container\">\n");
-      out.write("            <div class=\"card card-login mx-auto mt-5\">\n");
-      out.write("                <div class=\"card-header\">Login</div>\n");
+      out.write("    <body>\n");
+      out.write("            <div class=\"container\">\n");
+      out.write("            <div class=\"card mx-auto mt-5\">\n");
+      out.write("                <div class=\"card-header\">Posibles Clientes</div>\n");
       out.write("                <div class=\"card-body\">\n");
-      out.write("                    <form action=\"LoginController\" method=\"post\">\n");
-      out.write("                        <div class=\"form-group\">\n");
-      out.write("                            <label for=\"lblEmail\">Email</label>\n");
-      out.write("                            <input class=\"form-control\" name=\"txtEmail\" type=\"email\" aria-describedby=\"emailHelp\" placeholder=\"Ingrese email\">\n");
-      out.write("                        </div>\n");
-      out.write("                        <div class=\"form-group\">\n");
-      out.write("                            <label for=\"lblPassword\">Password</label>\n");
-      out.write("                            <input class=\"form-control\" name=\"txtPassword\" type=\"password\" placeholder=\"Password\">\n");
-      out.write("                        </div>\n");
-      out.write("                        <div class=\"form-group\">\n");
-      out.write("                            <div class=\"form-check\">\n");
-      out.write("                                <label class=\"form-check-label\">\n");
-      out.write("                                    <input class=\"form-check-input\" type=\"checkbox\" name=\"chkRecordar\">Recordar Password</label>\n");
-      out.write("                            </div>\n");
-      out.write("                        </div>\n");
-      out.write("                        <input name=\"btnAceptar\" type=\"submit\" class=\"btn btn-primary btn-block\" value=\"Aceptar\"/>\n");
+      out.write("                    <form >\n");
+      out.write("                        \n");
       out.write("                    </form>\n");
-      out.write("                    <div class=\"text-center\">\n");
-      out.write("                        <a class=\"d-block small mt-3\" href=\"Registrar.jsp\">Registrar cuenta</a>\n");
-      out.write("                    </div>\n");
       out.write("                </div>\n");
       out.write("            </div>\n");
       out.write("        </div>\n");
       out.write("    </body>\n");
       out.write("</html>\n");
-      out.write("\n");
-      out.write("\n");
-      out.write("\n");
     } catch (Throwable t) {
       if (!(t instanceof SkipPageException)){
         out = _jspx_out;

@@ -17,8 +17,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Usuario
  */
-@WebServlet(name = "LoginController", urlPatterns = {"/LoginController"})
-public class LoginController extends HttpServlet {
+@WebServlet(name = "PosiblesClientesController", urlPatterns = {"/PosiblesClientesController"})
+public class PosiblesClientesController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,40 +31,19 @@ public class LoginController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        try {
-            
-            String stMensaje = "";
-            
-            if (request.getParameter("txtEmail").equals("")) {
-                stMensaje += "Ingrese email,";
-            }
-            if (request.getParameter("txtPassword").equals("")) {
-                stMensaje += "Ingrese la password,";
-            }
-            
-            if (!stMensaje.equals("")) {
-                throw new Exception(stMensaje.substring(0, stMensaje.length() - 1));
-            }
-            Models.clsLogin obclsLogin = new Models.clsLogin();
-            obclsLogin.setStEmail(request.getParameter("txtEmail").toString());
-            obclsLogin.setStPassword(request.getParameter("txtPassword").toString());
-            
-            BL.clsLogin obBLclsLogin = new BL.clsLogin();
-            
-            boolean blBandera = obBLclsLogin.validarLogin(obclsLogin); 
-            
-            if (blBandera)
-                request.getRequestDispatcher("Index.jsp").forward(request, response);
-            else
-                throw new Exception("Email o Password Incorrecto");
-           
-        } catch (Exception ex) {
-            
-            request.setAttribute("stError", ex.getMessage());
-            request.getRequestDispatcher("Login.jsp").forward(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet PosiblesClientesController</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet PosiblesClientesController at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
