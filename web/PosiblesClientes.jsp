@@ -4,6 +4,8 @@
     Author     : Usuario
 --%>
 
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -26,12 +28,37 @@
         <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
         <!-- Core plugin JavaScript-->
         <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-        
+
         <link href="css/sweetalert.css" rel="stylesheet" type="text/css">
         <script src="js/sweetalert.min.js" type="text/javascript"></script>
-        
+
     </head>
     <body>
+
+        <%
+            List<Models.clsPosiblesClientes> lstclsPosiblesClientes
+                    = new ArrayList<Models.clsPosiblesClientes>();
+            if (session.getAttribute("session_lstclsPosiblesClientes") != null) {
+                lstclsPosiblesClientes = (List<Models.clsPosiblesClientes>) session.getAttribute("session_lstclsPosiblesClientes");
+            }
+
+            if (request.getAttribute("stMensaje") != null && request.getAttribute("stTipo") != null) {
+        %>
+        <input tpe="text" hidden="" id="txtMensaje"
+               value="<%= request.getAttribute("stMensaje")%>" />
+        <input tpe="text" hidden="" id="txtTipo"
+               value="<%= request.getAttribute("stTipo")%>" />
+
+        <script>
+            var mensaje = document.getElementById("txtMensaje").value;
+            var tipo = document.getElementById("txtTipo").value;
+
+            swal("Mensaje", mensaje, tipo);
+        </script>
+
+        <%
+            }
+        %>
         <div class="container">
             <div class="card mx-auto mt-5">
                 <div class="card-header">Posibles Clientes</div>
@@ -40,9 +67,10 @@
                         <div class="form-group">
                             <div class="form-row">
                                 <div class="col-md-6">
-                                    <input type="submit" value="Guardar" class="btn btn-primary">
-                                    <input type="submit" value="Modificar" class="btn btn-primary">
-                                    <input type="submit" value="Cancelar" class="btn btn-primary">
+                                    <input type="submit" name="btnGuardar" value="Guardar" class="btn btn-primary">
+                                    <input type="submit" name="btnModificar" value="Modificar" class="btn btn-primary">
+                                    <input type="submit" name="btnCancelar" value="Cancelar" class="btn btn-primary">
+                                    <a class="btn btn-primary" href="Index.jsp">Volver</a>
                                 </div>
                             </div>
                         </div>
@@ -83,7 +111,7 @@
                                 </div>
                                 <div class="col-md-3">
                                     <label name="lblTelefono">Telefono</label>
-                                    <input type="number" class="form-control" placeholder="Telefono" name="txtTelefono"/>
+                                    <input type="text" class="form-control" placeholder="Telefono" name="txtTelefono"/>
                                 </div>
                                 <div class="col-md-3">
                                     <label name="lblFax">Fax</label>
@@ -91,7 +119,7 @@
                                 </div>
                                 <div class="col-md-3">
                                     <label name="lblMovil">Movil</label>
-                                    <input type="number" class="form-control" placeholder="Movil" name="txtMovil"/>
+                                    <input type="text" class="form-control" placeholder="Movil" name="txtMovil"/>
                                 </div>
                             </div>
                         </div>
@@ -184,6 +212,78 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="form-control">
+                            <div class="form-row">
+                                <div class="col-12">
+                                    <b>
+                                        <i class="fa fa-clipboard"></i>
+                                        Registros: <%= lstclsPosiblesClientes.size()%>
+                                    </b>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-control">
+                            <div class="form-row">
+                                <div class="col-12">
+                                    <table class="table table-bordered table-success table-responsive">
+                                        <tr>
+                                            <td>Empresa</td>
+                                            <td>Nombre</td>
+                                            <td>Apellidos</td>
+                                            <td>Titulo</td>
+                                            <td>Correo Electronico</td>
+                                            <td>Telefono</td>
+                                            <td>Fax</td>
+                                            <td>Movil</td>
+                                            <td>Sitio web</td>
+                                            <td>Fuente posible cliente</td>
+                                            <td>Estado De Posibles Clientes</td>
+                                            <td>Sector</td>
+                                            <td>Cantidad de empleados</td>
+                                            <td>Ingresos anuales</td>
+                                            <td>Calificacion</td>
+                                            <td>No participacion correo electronico</td>
+                                            <td>ID de Skype</td>
+                                            <td>Twitter</td>
+                                            <td>Correo electronico secundario</td>
+                                        </tr>
+                                        <%
+                                            for (Models.clsPosiblesClientes item : lstclsPosiblesClientes) {
+                                                Models.clsFuentePosibleCliente obclsFuentePosibleCliente = item.getObclsFuentePosibleCliente();
+                                                Models.clsEstadoPosibleCliente obclsEstadoPosibleCliente = item.getObclsEstadoPosibleCliente();
+                                                Models.clsSector obclsSector = item.getObclsSector();
+                                                Models.clsCalificacion obclsCalificacion = item.getObclsCalificacion();
+                                        %>       
+                                        <tr>
+                                            <td><%= item.getStEmpresa()%></td>
+                                            <td><%= item.getStNombre()%></td>
+                                            <td><%= item.getStApellido()%></td>
+                                            <td><%= item.getStTitulo()%></td>
+                                            <td><%= item.getStCorreoElectronico()%></td>
+                                            <td><%= item.getStTelefono()%></td>
+                                            <td><%= item.getStFax()%></td>
+                                            <td><%= item.getStMovil()%></td>
+                                            <td><%= item.getStSitioWeb()%></td>
+                                            <td><%= obclsFuentePosibleCliente.getStDescripcion()%></td>
+                                            <td><%= obclsEstadoPosibleCliente.getStDescripcion()%></td>
+                                            <td><%= obclsSector.getStDescripcion()%></td>
+                                            <td><%= item.getInCantidadEmpleados()%></td>
+                                            <td><%= item.getDbIngresosAnuales()%></td>
+                                            <td><%= obclsCalificacion.getStDescripcion()%></td>
+                                            <td><%= item.getChNoParticipacionCorreoElectronico()%></td>
+                                            <td><%= item.getStIDSkype()%></td>
+                                            <td><%= item.getStTwitter()%></td>
+                                            <td><%= item.getStCorreoElectronicoSecundario()%></td>
+                                        </tr>
+                                        <%
+                                            }
+                                        %>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>  
                     </form>
                 </div>
             </div>

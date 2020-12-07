@@ -82,7 +82,7 @@
                             <div class="form-row">
                                 <div class="col-md-12">
                                     <label for="lblCorreo">Correo</label>
-                                    <input class="form-control" name="txtCorreo" type="text" placeholder="Ingrese su Correo">
+                                    <input class="form-control" name="txtCorreo" type="email" placeholder="Ingrese su Correo">
                                 </div>
                             </div>
                         </div>

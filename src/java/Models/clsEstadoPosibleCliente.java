@@ -10,8 +10,7 @@ package Models;
  * @author Usuario
  */
 public class clsEstadoPosibleCliente {
-    public int inCodigo;
-
+    
     public int getInCodigo() {
         return inCodigo;
     }
@@ -27,5 +26,6 @@ public class clsEstadoPosibleCliente {
     public void setStDescripcion(String stDescripcion) {
         this.stDescripcion = stDescripcion;
     }
+    public int inCodigo;
     public String stDescripcion;
 }

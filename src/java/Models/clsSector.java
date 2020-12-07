@@ -10,22 +10,22 @@ package Models;
  * @author Usuario
  */
 public class clsSector {
-    public int inSector;
+    public int inCodigo;
 
     public int getInSector() {
-        return inSector;
+        return inCodigo;
     }
 
-    public void setInSector(int inSector) {
-        this.inSector = inSector;
+    public void setInCodigo(int inCodigo) {
+        this.inCodigo = inCodigo;
     }
 
-    public String getStSector() {
-        return stSector;
+    public String getStDescripcion() {
+        return stDescripcion;
     }
 
-    public void setStSector(String stSector) {
-        this.stSector = stSector;
+    public void setStDescripcion(String stDescripcion) {
+        this.stDescripcion = stDescripcion;
     }
-    public String stSector;
+    public String stDescripcion;
 }
