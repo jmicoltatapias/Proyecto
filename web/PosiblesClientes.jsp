@@ -66,21 +66,10 @@
         %>
         <div class="container">
             <div class="card mx-auto mt-5">
-                <div class="card-header">Posibles Clientes</div>
+                <div class="card-header alert-primary">Posibles Clientes</div>
                 <div class="card-body">
                     <form action="PosiblesClientesController" method="post">
-                        <div class="form-group">
-                            <div class="form-row">
-                                <div class="col-md-6">
-                                    <input type="submit" name="btnGuardar" value="Guardar" class="btn btn-primary">
-                                    <input type="submit" name="btnModificar" value="Modificar" class="btn btn-primary">
-                                    <input type="submit" name="btnCancelar" href="#" value="Cancelar" class="btn btn-primary">
-                                    <a class="btn btn-primary" href="Index.jsp">Volver</a>
-                                    <input type="text" name="codigomodificar" id="codigomodificar" 
-                                           value="<%= obclsPosiblesClientes.getInCodigo() %>" hidden=""/>     
-                                </div>
-                            </div>
-                        </div>
+                        
                         <div class="form-group">
                             <div class="form-row">
                                 <div class="col-md-12">
@@ -240,6 +229,7 @@
                                 </div>
 
                                 <div class="col-md-3">
+                                    <br>
                                     <label name="lblNoParticipacionCorreoElectronico"> 
                                         <input type="checkbox" 
                                                name="chkNoParticiacionCorreoElectronico"
@@ -277,7 +267,18 @@
                                 </div>
                             </div>
                         </div>
-
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="col-md-6">
+                                    <input type="submit" name="btnGuardar" value="Guardar" class="btn btn-success">
+                                    <input type="submit" name="btnModificar" value="Modificar" class="btn btn-primary">
+                                    <a class="btn btn-danger" href="PosiblesClientes.jsp">Cancelar</a>
+                                    <a class="btn btn-dark" href="Index.jsp">Volver</a>
+                                    <input type="text" name="codigomodificar" id="codigomodificar" 
+                                           value="<%= obclsPosiblesClientes.getInCodigo() %>" hidden=""/>     
+                                </div>
+                            </div>
+                        </div>            
                         <div class="form-control">
                             <div class="form-row">
                                 <div class="col-12">
@@ -288,11 +289,10 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="form-control">
                             <div class="form-row">
                                 <div class="col-12">
-                                    <table class="table table-bordered table-success table-responsive">
+                                    <table class="table table-bordered table-primary table-responsive">
                                         <tr>
                                             <td>Empresa</td>
                                             <td>Nombre</td>
@@ -343,7 +343,7 @@
                                             <td><%= item.getStCorreoElectronicoSecundario()%></td>
                                             
                                             <td>
-                                                <a class="btn btn-success btn-sm"
+                                                <a class="btn btn-primary btn-sm"
                                                    href="PosiblesClientesController?stOpcion=M&codigoSeleccionado=<%=item.getInCodigo()%>">
                                                     Modificar</a>
                                                 
