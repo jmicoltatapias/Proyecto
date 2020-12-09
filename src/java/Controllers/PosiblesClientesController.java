@@ -5,6 +5,7 @@
  */
 package Controllers;
 
+import Models.clsPosiblesClientes;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -23,15 +24,6 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "PosiblesClientesController", urlPatterns = {"/PosiblesClientesController"})
 public class PosiblesClientesController extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         if (request.getParameter("btnGuardar") != null) {
@@ -39,6 +31,112 @@ public class PosiblesClientesController extends HttpServlet {
         } else if (request.getParameter("btnModificar") != null) {
 
         } else if (request.getParameter("btnCancelar") != null) {
+
+        } else if (request.getParameter("codigoSeleccionado") != null) {
+            if (request.getParameter("stOpcion").equals("M")) {
+                cargarModificar(request, response);
+            } else if (request.getParameter("stOpcion").equals("E")) {
+                btnEliminar(request, response);
+            }
+
+        }
+    }
+    
+    public void btnModificar(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException{
+    
+        try{
+            
+            List<Models.clsPosiblesClientes> lstPosiblesClientes = new ArrayList<Models.clsPosiblesClientes>();
+            
+            HttpSession session = request.getSession(true);
+            
+            if(session.getAttribute("session_lstclsPosiblesClientes") !=null){
+                
+                lstPosiblesClientes = (List<Models.clsPosiblesClientes>) session.getAttribute("session_lstclsPosiblesClientes");
+                
+                int inPosicion = 0;
+                for (clsPosiblesClientes elem : lstPosiblesClientes) {
+                    
+                }
+            }
+        
+        }
+        catch(Exception ex){
+        
+            request.setAttribute("stMensaje", ex.getMessage());
+            request.setAttribute("stTipo", "error");
+            
+            request.getRequestDispatcher("PosiblesClientes.jsp").forward(request, response);
+        }
+    
+    }
+
+    public void btnEliminar(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        try {
+
+            Models.clsPosiblesClientes obclsPosiblesClientes = new Models.clsPosiblesClientes();
+
+            List<Models.clsPosiblesClientes> lstPosiblesClientes = new ArrayList<Models.clsPosiblesClientes>();
+            List<Models.clsPosiblesClientes> lstPosiblesClientesNueva = new ArrayList<Models.clsPosiblesClientes>();
+
+            HttpSession session = request.getSession(true);
+
+            if (session.getAttribute("session_lstclsPosiblesClientes") != null) {
+                lstPosiblesClientes = (List<Models.clsPosiblesClientes>) session.getAttribute("session_lstclsPosiblesClientes");
+                    lstPosiblesClientesNueva = lstPosiblesClientes;
+            }
+     
+            for(Models.clsPosiblesClientes item : lstPosiblesClientes){
+                if(item.getInCodigo() == Integer.parseInt(request.getParameter("codigoSeleccionado"))){
+                    obclsPosiblesClientes = item; 
+                    lstPosiblesClientesNueva.remove(item);
+                    
+                }
+            }
+            
+            session.setAttribute("session_lstclsPosiblesClientes", lstPosiblesClientesNueva);
+            request.setAttribute("stTipo", "sucess");
+            request.setAttribute("stMensaje", "Se realizo el proceso con exito");
+            request.getRequestDispatcher("PosiblesClientes.jsp").forward(request, response);
+            
+        } catch(Exception ex){
+            request.setAttribute("stTipo", "Error");
+            request.setAttribute("stMensaje", ex.getMessage());
+            request.getRequestDispatcher("PosiblesClientes.jsp").forward(request, response);
+        }
+    }
+
+    public void cargarModificar(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        try {
+
+            Models.clsPosiblesClientes obclsPosiblesClientes = new Models.clsPosiblesClientes();
+
+            List<Models.clsPosiblesClientes> lstPosiblesClientes = new ArrayList<Models.clsPosiblesClientes>();
+
+            HttpSession session = request.getSession(true);
+
+            if (session.getAttribute("session_lstclsPosiblesClientes") != null) {
+                lstPosiblesClientes = (List<Models.clsPosiblesClientes>) session.getAttribute("session_lstclsPosiblesClientes");
+
+            }
+            for(Models.clsPosiblesClientes item : lstPosiblesClientes){
+                if(item.getInCodigo() == Integer.parseInt(request.getParameter("codigoSeleccionado"))){
+                    obclsPosiblesClientes = item;
+                }
+            
+            }
+            request.setAttribute("obclsPosiblesClientes", obclsPosiblesClientes );
+            request.getRequestDispatcher("PosiblesClientes.jsp").forward(request, response);
+
+        } catch (Exception ex) {
+
+            
+            request.setAttribute("stTipo", "Error");
+            request.getRequestDispatcher("PosiblesClientes.jsp").forward(request, response);
 
         }
     }
@@ -49,6 +147,7 @@ public class PosiblesClientesController extends HttpServlet {
         try {
 
             Models.clsPosiblesClientes obclsPosiblesClientes = new Models.clsPosiblesClientes();
+            
             Models.clsFuentePosibleCliente obclsFuentePosibleCliente = new Models.clsFuentePosibleCliente();
             Models.clsEstadoPosibleCliente obclsEstadoPosibleCliente = new Models.clsEstadoPosibleCliente();
             Models.clsSector obclsSector = new Models.clsSector();
@@ -189,7 +288,9 @@ public class PosiblesClientesController extends HttpServlet {
                         ? 'S' : 'N';
 
                 obclsPosiblesClientes.setChNoParticipacionCorreoElectronico(chSeleccion);
-            }
+            }else
+                obclsPosiblesClientes.setChNoParticipacionCorreoElectronico('N');
+            
             if (request.getParameter("txtIDSkype") != null) {
                 obclsPosiblesClientes.setStIDSkype(request.getParameter("txtIDSkype"));
             }
@@ -199,20 +300,19 @@ public class PosiblesClientesController extends HttpServlet {
             if (request.getParameter("txtCorreoElectronicoSecundario") != null) {
                 obclsPosiblesClientes.setStCorreoElectronicoSecundario(request.getParameter("txtCorreoElectronicoSecundario"));
             }
-            
+
             HttpSession session = request.getSession(true);
-            
-            List<Models.clsPosiblesClientes> lstclsPosiblesClientes = 
-                    new ArrayList<Models.clsPosiblesClientes>();
-            
-            if(session.getAttribute("session_lstclsPosiblesClientes") !=null){
-                lstclsPosiblesClientes = (List<Models.clsPosiblesClientes>) 
-                        session.getAttribute("session_lstclsPosiblesClientes");
+
+            List<Models.clsPosiblesClientes> lstclsPosiblesClientes
+                    = new ArrayList<Models.clsPosiblesClientes>();
+
+            if (session.getAttribute("session_lstclsPosiblesClientes") != null) {
+                lstclsPosiblesClientes = (List<Models.clsPosiblesClientes>) session.getAttribute("session_lstclsPosiblesClientes");
             }
-            
+
             int inCodigo = lstclsPosiblesClientes.size() + 1;
             obclsPosiblesClientes.setInCodigo(inCodigo);
-            
+
             lstclsPosiblesClientes.add(obclsPosiblesClientes);
             session.setAttribute("session_lstclsPosiblesClientes", lstclsPosiblesClientes);
 
@@ -221,14 +321,13 @@ public class PosiblesClientesController extends HttpServlet {
 
             request.getRequestDispatcher("PosiblesClientes.jsp").forward(request, response);
 
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
 
             request.setAttribute("stMensaje", ex.getMessage());
             request.setAttribute("stTipo", "error");
-            
+
             request.getRequestDispatcher("PosiblesClientes.jsp").forward(request, response);
-            
+
         }
 
     }
