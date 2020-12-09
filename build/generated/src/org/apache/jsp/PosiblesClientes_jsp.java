@@ -123,8 +123,12 @@ public final class PosiblesClientes_jsp extends org.apache.jasper.runtime.HttpJs
       out.write("                                <div class=\"col-md-6\">\n");
       out.write("                                    <input type=\"submit\" name=\"btnGuardar\" value=\"Guardar\" class=\"btn btn-primary\">\n");
       out.write("                                    <input type=\"submit\" name=\"btnModificar\" value=\"Modificar\" class=\"btn btn-primary\">\n");
-      out.write("                                    <input type=\"submit\" name=\"btnCancelar\" value=\"Cancelar\" class=\"btn btn-primary\">\n");
+      out.write("                                    <input type=\"submit\" name=\"btnCancelar\" href=\"#\" value=\"Cancelar\" class=\"btn btn-primary\">\n");
       out.write("                                    <a class=\"btn btn-primary\" href=\"Index.jsp\">Volver</a>\n");
+      out.write("                                    <input type=\"text\" name=\"codigomodificar\" id=\"codigomodificar\" \n");
+      out.write("                                           value=\"");
+      out.print( obclsPosiblesClientes.getInCodigo() );
+      out.write("\" hidden=\"\"/>     \n");
       out.write("                                </div>\n");
       out.write("                            </div>\n");
       out.write("                        </div>\n");
